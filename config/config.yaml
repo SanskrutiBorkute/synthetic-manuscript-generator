@@ -1,0 +1,117 @@
+# ==========================================
+# Synthetic Manuscript Generator Configuration
+# ==========================================
+
+# General Project Settings
+project:
+  name: "synthetic-manuscript-generator"
+  seed: 42
+  description: "Synthetic dataset generation for historical Indic manuscripts"
+
+# Data Sources
+paths:
+  raw_data_dir: "data/raw"
+  output_dir: "data/output"
+  fonts_dir: "fonts"
+  scripts_data:
+    devanagari: "data/raw/devanagari_md.md"
+    modi: "data/raw/Modi_md.md"
+    sharada: "data/raw/sharada_md.md"
+
+# Dataset Generation Target
+generation:
+  total_samples: 300
+  samples_per_script:
+    devanagari: 100
+    modi: 100
+    sharada: 100
+  split_counts_per_script:
+    train: 85
+    val: 10
+    test: 5
+  split_ratio:
+    train: 0.85
+    val: 0.10
+    test: 0.05
+
+# Manuscript Canvas & Layout Settings
+canvas:
+  width: 1600
+  height: 1000
+  dpi: 300
+  background_types:
+    - "parchment"
+    - "aged_paper"
+    - "palm_leaf"
+
+layout:
+  margins:
+    top: 80
+    bottom: 80
+    left: 100
+    right: 100
+  line_spacing: 1.4
+  font_size_range: [28, 42]
+  draw_borders: true
+  border_margin: 40
+  border_colors:
+    - "#8B0000"  # Crimson / Vermilion
+    - "#1A1A1A"  # Black ink
+    - "#5C4033"  # Dark brown
+
+# Text & Font Settings (Explicit, deterministic single font per script)
+fonts:
+  devanagari:
+    - "fonts/devanagari/JainiPurva-Regular.ttf"
+    - "fonts/devanagari/Tillana-Regular.ttf"
+  modi:
+    - "fonts/modi/NotoSansModi-Regular.ttf"
+  sharada:
+    - "fonts/sharada/NotoSansSharada-Regular.ttf"
+
+ink:
+  colors:
+    - "#1A1412"  # Carbon black
+    - "#2B1D0C"  # Dark iron gall / sepia
+    - "#8B1E1E"  # Vermilion / cinnabar (accents/rubrication)
+
+# Augmentations (Aging & Degradation Pipeline)
+augmentations:
+  enabled: true
+  ink_bleed:
+    probability: 0.6
+    kernel_size_range: [1, 3]
+  ink_fading:
+    probability: 0.5
+    fade_factor_range: [0.7, 0.95]
+  stains:
+    probability: 0.7
+    max_stains_per_image: 4
+  aging_vignette:
+    probability: 0.8
+    intensity: 0.3
+  noise:
+    probability: 0.5
+    gaussian_var: 0.005
+  blur:
+    probability: 0.4
+    max_radius: 1.2
+  paper_folds:
+    probability: 0.5
+    max_folds: 2
+
+# Output Annotation Formats
+annotations:
+  # MANDATORY: Paired .md ground-truth annotation file for EVERY generated image
+  save_markdown_annotations: true
+  markdown_format:
+    include_header: true
+    include_full_text: true
+    include_line_details: true
+    include_bounding_boxes: true
+  # Optional additional formats
+  save_json_metadata: true
+  save_coco_format: true
+  save_yolo_format: false
+  line_level: true
+  word_level: true

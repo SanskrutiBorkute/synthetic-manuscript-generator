@@ -1,0 +1,13 @@
+# Synthetic Manuscript Generator Dependencies
+# Core image processing and text rendering
+Pillow>=9.5.0
+numpy>=1.23.0
+opencv-python>=4.7.0.72
+
+# Configuration & Utilities
+PyYAML>=6.0
+tqdm>=4.65.0
+
+# Optional / Recommended for advanced Indic text shaping:
+# uharfbuzz>=0.36.0
+# fonttools>=4.39.0
