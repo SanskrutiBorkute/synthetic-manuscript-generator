@@ -203,7 +203,7 @@ for rec in train_records:
     })
 
 dataset = Dataset.from_list(hf_data)
-# dataset.push_to_hub("username/indic-synthetic-manuscripts")
+# dataset.push_to_hub("Sanskruti05/synthetic-indic-manuscripts")
 ```
 
 ---
