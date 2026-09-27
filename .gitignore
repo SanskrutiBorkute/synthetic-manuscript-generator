@@ -20,3 +20,5 @@ Thumbs.db
 
 # Generated dataset - uploaded separately to Hugging Face
 data/output/
+
+hf_upload/
